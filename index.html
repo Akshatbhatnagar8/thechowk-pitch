@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Chowk — Wedding Catering | Bali</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gold:#C9A84C;--gold-dim:#8C6D2F;--ivory:#FAF7F2;
+  --ink:#1C1410;--ink-mid:#4A3728;--ink-light:#8A7060;
+  --rust:#B94A1A;--cream:#F3EDE3;--line:rgba(201,168,76,0.2);
+}
+html{scroll-behavior:smooth}
+body{font-family:'Jost',sans-serif;background:var(--ivory);color:var(--ink);overflow-x:hidden}
+
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:20px 48px;
+  background:rgba(250,247,242,0.94);backdrop-filter:blur(12px);
+  border-bottom:0.5px solid var(--line);
+}
+.nav-logo{display:flex;align-items:center}
+.nav-logo img{height:42px;width:auto}
+.nav-links{display:flex;gap:32px}
+.nav-links a{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--ink-light);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--gold)}
+.nav-cta{background:var(--ink);color:var(--ivory);padding:10px 22px;border-radius:2px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;transition:background .2s}
+.nav-cta:hover{background:var(--rust)}
+
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;padding-top:80px}
+.hero-left{display:flex;flex-direction:column;justify-content:center;padding:80px 64px 80px 80px;position:relative}
+.hero-left::after{content:'';position:absolute;right:0;top:15%;bottom:15%;width:0.5px;background:var(--line)}
+.eyebrow{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:24px;display:flex;align-items:center;gap:12px}
+.eyebrow::before{content:'';display:block;width:32px;height:0.5px;background:var(--gold)}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(44px,5vw,70px);font-weight:300;line-height:1.08;margin-bottom:28px}
+.hero-title em{font-style:italic;color:var(--gold-dim)}
+.hero-body{font-size:15px;line-height:1.85;color:var(--ink-light);max-width:420px;margin-bottom:40px}
+.hero-actions{display:flex;gap:16px;align-items:center}
+.btn-primary{background:var(--ink);color:var(--ivory);padding:14px 28px;border-radius:2px;font-size:11px;letter-spacing:2px;text-transform:uppercase;text-decoration:none;transition:background .2s}
+.btn-primary:hover{background:var(--rust)}
+.btn-ghost{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink-light);text-decoration:none;border-bottom:0.5px solid var(--ink-light);padding-bottom:2px;transition:color .2s,border-color .2s}
+.btn-ghost:hover{color:var(--gold);border-color:var(--gold)}
+.hero-stats{margin-top:56px;padding-top:32px;border-top:0.5px solid var(--line);display:flex;gap:40px}
+.stat-num{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:300;line-height:1}
+.stat-label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink-light);margin-top:4px}
+.hero-right{position:relative;overflow:hidden}
+.photo-block{width:100%;height:100%;min-height:640px;background-size:cover;background-position:center;background-repeat:no-repeat}
+.img-label{position:absolute;bottom:24px;left:24px;background:rgba(28,20,16,.7);backdrop-filter:blur(8px);padding:8px 16px;border-radius:2px;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(250,247,242,.7)}
+
+.why{background:var(--ink);color:var(--ivory);padding:96px 80px}
+.why .eyebrow{color:var(--gold)}
+.why .eyebrow::before{background:var(--gold)}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,3.5vw,46px);font-weight:300;line-height:1.15}
+.sec-title em{font-style:italic;color:var(--gold-dim)}
+.sec-sub{margin-top:14px;font-size:15px;color:var(--ink-light);line-height:1.8;max-width:560px}
+.why .sec-title{color:var(--ivory)}
+.why .sec-sub{color:rgba(250,247,242,.55)}
+.sec-header{margin-bottom:52px}
+.pillars{display:grid;grid-template-columns:repeat(4,1fr);border:0.5px solid rgba(201,168,76,.15)}
+.pillar{padding:40px 32px;border-right:0.5px solid rgba(201,168,76,.15)}
+.pillar:last-child{border-right:none}
+.pillar-num{font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:300;color:rgba(201,168,76,.18);line-height:1;margin-bottom:20px}
+.pillar-title{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--ivory);margin-bottom:10px}
+.pillar-body{font-size:13px;line-height:1.8;color:rgba(250,247,242,.5)}
+
+#events{padding:96px 0;background:var(--ivory)}
+.events-intro{padding:0 80px 52px}
+.events-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.ecard{position:relative;overflow:hidden;cursor:pointer;aspect-ratio:3/4;background:var(--cream);transition:transform .1s}
+.ecard.featured{grid-column:span 2;aspect-ratio:auto;min-height:500px}
+.ecard:hover .ecard-bg{transform:scale(1.05)}
+.ecard-bg{width:100%;height:100%;min-height:320px;background-size:cover;background-position:center;transition:transform .6s ease}
+.ecard-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(28,20,16,.93) 0%,rgba(28,20,16,.25) 55%,transparent 100%);display:flex;flex-direction:column;justify-content:flex-end;padding:28px}
+.ecard-tag{display:inline-block;margin-bottom:10px;font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);border:0.5px solid rgba(201,168,76,.5);padding:4px 10px;align-self:flex-start}
+.ecard-name{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:400;color:var(--ivory);line-height:1.2;margin-bottom:8px}
+.ecard.featured .ecard-name{font-size:36px}
+.ecard-meta{display:flex;gap:14px;flex-wrap:wrap;font-size:11px;letter-spacing:1px;color:rgba(250,247,242,.55)}
+.ecard-meta span::before{content:'· ';opacity:.4}
+.ecard-meta span:first-child::before{display:none}
+
+.modal{display:none;position:fixed;inset:0;z-index:200;background:rgba(28,20,16,.88);backdrop-filter:blur(16px);align-items:center;justify-content:center;padding:40px}
+.modal.open{display:flex}
+.modal-panel{background:var(--ivory);max-width:880px;width:100%;max-height:88vh;overflow-y:auto;display:grid;grid-template-columns:1fr 1fr;position:relative;border-radius:2px}
+.modal-photo{background:var(--cream);min-height:480px;background-size:cover;background-position:center;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px}
+.modal-info{padding:48px 40px;display:flex;flex-direction:column}
+.modal-close{position:absolute;top:16px;right:20px;background:none;border:none;cursor:pointer;font-size:20px;color:var(--ink-light);z-index:1;transition:color .2s}
+.modal-close:hover{color:var(--ink)}
+.modal-tag{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.modal-tag::before{content:'';width:20px;height:0.5px;background:var(--gold)}
+.modal-title{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:300;line-height:1.1;color:var(--ink);margin-bottom:24px}
+.specs{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:26px}
+.spec{border-left:1.5px solid var(--gold);padding-left:14px}
+.spec-l{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--ink-light)}
+.spec-v{font-size:15px;font-weight:500;color:var(--ink);margin-top:3px}
+.ctags-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--ink-light);margin-bottom:10px}
+.ctags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:28px}
+.ctag{font-size:11px;padding:4px 12px;border-radius:20px;background:var(--cream);color:var(--ink-mid);border:0.5px solid var(--line)}
+.tquote{font-family:'Cormorant Garamond',serif;font-size:18px;font-style:italic;font-weight:300;line-height:1.65;color:var(--ink-mid);margin-bottom:12px}
+.tauthor{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold)}
+.tsection{border-top:0.5px solid var(--line);padding-top:22px;margin-top:auto}
+
+#locations{background:var(--cream);padding:96px 80px}
+.loc-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:0}
+.loc-card{padding:48px 40px;background:var(--ivory);border:0.5px solid var(--line);position:relative;overflow:hidden;transition:border-color .3s}
+.loc-card:hover{border-color:rgba(201,168,76,.5)}
+.loc-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .4s}
+.loc-card:hover::before{transform:scaleX(1)}
+.loc-num{font-family:'Cormorant Garamond',serif;font-size:64px;font-weight:300;color:rgba(201,168,76,.1);position:absolute;top:20px;right:28px;line-height:1}
+.loc-badge{display:inline-block;margin-bottom:14px;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);border:0.5px solid rgba(201,168,76,.4);padding:4px 10px}
+.loc-name{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:400;color:var(--ink);margin-bottom:8px;line-height:1.2}
+.loc-desc{font-size:13px;color:var(--ink-light);margin-bottom:20px;line-height:1.7}
+.loc-feats{list-style:none}
+.loc-feats li{font-size:13px;color:var(--ink-mid);padding:6px 0;border-bottom:0.5px solid var(--line);display:flex;align-items:center;gap:10px}
+.loc-feats li::before{content:'✦';color:var(--gold);font-size:8px;flex-shrink:0}
+.loc-feats li:last-child{border-bottom:none}
+.loc-wide{grid-column:span 2;background:var(--cream)}
+.loc-wide .loc-feats{display:grid;grid-template-columns:repeat(3,1fr)}
+
+#testimonials{padding:96px 80px}
+.t-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.tcard{padding:32px;border:0.5px solid var(--line);border-radius:2px}
+.tcard-stars{color:var(--gold);font-size:12px;letter-spacing:3px;margin-bottom:16px}
+.tcard-quote{font-family:'Cormorant Garamond',serif;font-size:19px;font-style:italic;font-weight:300;line-height:1.65;color:var(--ink);margin-bottom:20px}
+.tcard-line{width:32px;height:0.5px;background:var(--gold);margin-bottom:14px}
+.tcard-author{font-size:12px;color:var(--ink-mid);font-weight:500}
+.tcard-event{font-size:11px;color:var(--ink-light);margin-top:2px}
+
+.contact-sec{background:var(--ink);display:grid;grid-template-columns:1fr 1fr}
+.contact-left{padding:80px;border-right:0.5px solid rgba(201,168,76,.12)}
+.contact-left .eyebrow{color:var(--gold)}
+.contact-left .eyebrow::before{background:var(--gold)}
+.c-title{font-family:'Cormorant Garamond',serif;font-size:44px;font-weight:300;line-height:1.1;color:var(--ivory);margin-bottom:18px}
+.c-title em{font-style:italic;color:var(--gold)}
+.c-body{font-size:14px;line-height:1.8;color:rgba(250,247,242,.5);margin-bottom:40px}
+.c-items{display:flex;flex-direction:column;gap:14px}
+.c-item{display:flex;align-items:center;gap:16px;padding:18px 22px;border:0.5px solid rgba(201,168,76,.15);border-radius:2px;text-decoration:none;transition:background .2s,border-color .2s}
+.c-item:hover{background:rgba(201,168,76,.07);border-color:rgba(201,168,76,.4)}
+.c-icon{width:36px;height:36px;border-radius:50%;background:rgba(201,168,76,.1);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+.c-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:3px}
+.c-val{font-size:15px;color:var(--ivory)}
+.contact-right{padding:80px;display:flex;flex-direction:column;justify-content:center}
+.form-label{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(250,247,242,.35);margin-bottom:24px}
+.form{display:flex;flex-direction:column;gap:14px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.field{display:flex;flex-direction:column;gap:6px}
+.field label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(250,247,242,.38)}
+.field input,.field select,.field textarea{background:rgba(250,247,242,.06);border:0.5px solid rgba(201,168,76,.2);color:var(--ivory);padding:12px 16px;font-family:'Jost',sans-serif;font-size:14px;border-radius:1px;outline:none;transition:border-color .2s,background .2s}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:rgba(201,168,76,.6);background:rgba(250,247,242,.09)}
+.field select option{background:#2C1A0E;color:var(--ivory)}
+.field textarea{resize:none;height:80px}
+.form-btn{background:var(--gold);color:var(--ink);border:none;padding:15px 32px;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:500;cursor:pointer;border-radius:1px;transition:background .2s;margin-top:4px}
+.form-btn:hover{background:#D4A830}
+
+footer{padding:30px 80px;background:var(--ink);border-top:0.5px solid rgba(201,168,76,.1);display:flex;align-items:center;justify-content:space-between}
+.f-logo{display:flex;align-items:center}
+.f-logo img{height:32px;width:auto;filter:brightness(10)}
+.f-note{font-size:11px;letter-spacing:1px;color:rgba(250,247,242,.3)}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+.fu{animation:fadeUp .7s ease both}
+.fu2{animation:fadeUp .7s .15s ease both}
+.fu3{animation:fadeUp .7s .3s ease both}
+.fu4{animation:fadeUp .7s .45s ease both}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo"><img src="https://static.wixstatic.com/media/c16aa2_442a2fb3793a4a4c80b957ae8258fcfb~mv2.png/v1/fill/w_515,h_68,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/the%20chowk%20-%20logo%20-_primary%20logo%20copy%202.png" alt="The Chowk"></div>
+  <div class="nav-links">
+    <a href="#events">Past Events</a>
+    <a href="#locations">Venues</a>
+    <a href="#testimonials">Reviews</a>
+  </div>
+  <a href="#contact" class="nav-cta">Get Proposal</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-left">
+    <div class="eyebrow fu">Wedding Catering · Bali</div>
+    <h1 class="hero-title fu2">Your dream feast,<br><em>crafted with soul</em></h1>
+    <p class="hero-body fu3">The Chowk brings authentic Indian culinary heritage to your most treasured celebration — from intimate mehndi evenings to grand multi-day banquets at our Ubud and Jimbaran venues.</p>
+    <div class="hero-actions fu4">
+      <a href="#contact" class="btn-primary">Request a Proposal</a>
+      <a href="#events" class="btn-ghost">See Past Events</a>
+    </div>
+    <div class="hero-stats fu4">
+      <div><div class="stat-num">4.8★</div><div class="stat-label">755+ Reviews</div></div>
+      <div><div class="stat-num">2</div><div class="stat-label">Iconic Venues</div></div>
+      <div><div class="stat-num">100+</div><div class="stat-label">Events Catered</div></div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="photo-block" style="background-image:url('https://static.wixstatic.com/media/c16aa2_8486c07400a04cafa5aa812bc218bf06~mv2.jpg/v1/fill/w_1600,h_900,al_c,q_85,enc_avif,quality_auto/c16aa2_8486c07400a04cafa5aa812bc218bf06~mv2.jpg')"></div>
+    <div class="img-label">Ubud · Museum Puri Lukisan</div>
+  </div>
+</div>
+
+<!-- WHY THE CHOWK -->
+<section class="why">
+  <div class="sec-header">
+    <div class="eyebrow">Why The Chowk</div>
+    <h2 class="sec-title" style="color:var(--ivory)">What sets us apart</h2>
+    <p class="sec-sub">Three restaurants, one specialist mithai chef, and a team that has made hundreds of Bali celebrations unforgettable.</p>
+  </div>
+  <div class="pillars">
+    <div class="pillar">
+      <div class="pillar-num">01</div>
+      <div class="pillar-title">Specialist Mithai Chef</div>
+      <p class="pillar-body">The only caterer in Bali with a dedicated Indian sweets chef. Handcrafted mithai stations guests remember long after the feast.</p>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">02</div>
+      <div class="pillar-title">Iconic Venues</div>
+      <p class="pillar-body">Host inside Museum Puri Lukisan, Ubud or the InterContinental Bali Resort, Jimbaran — or we come to you.</p>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">03</div>
+      <div class="pillar-title">Full Regional Range</div>
+      <p class="pillar-body">North Indian, South Indian, Indo-Chinese, Jain, vegan — every guest at your table is taken care of.</p>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">04</div>
+      <div class="pillar-title">End-to-End Service</div>
+      <p class="pillar-body">Setup, live counters, service, cleanup. Our team handles it all so you arrive at your own celebration as a guest.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PAST EVENTS -->
+<section id="events">
+  <div class="events-intro">
+    <div class="eyebrow">Past Events</div>
+    <h2 class="sec-title">Feasts we've crafted</h2>
+    <p class="sec-sub" style="color:var(--ink-light)">Every celebration is unique. Click any event to see the full story — menus, guest details, and what the couple said.</p>
+  </div>
+  <div class="events-grid" id="eventsGrid"></div>
+</section>
+
+<!-- LOCATIONS -->
+<section id="locations" style="background:var(--cream);padding:96px 80px">
+  <div class="sec-header">
+    <div class="eyebrow">Our Venues</div>
+    <h2 class="sec-title">Two iconic settings,<br><em>or yours</em></h2>
+    <p class="sec-sub" style="color:var(--ink-light)">Host your celebration at one of our signature venues, or let us bring The Chowk experience anywhere across Bali.</p>
+  </div>
+  <div class="loc-grid">
+    <div class="loc-card">
+      <div class="loc-num">01</div>
+      <div class="loc-badge">Ubud</div>
+      <div class="loc-name">Museum Puri Lukisan</div>
+      <div class="loc-desc">A tranquil outdoor setting within one of Ubud's most historic cultural spaces — lush gardens, traditional Balinese architecture, and an ambiance unlike any other.</div>
+      <ul class="loc-feats">
+        <li>Exclusive restaurant & garden use</li>
+        <li>Outdoor ceremony & reception setups</li>
+        <li>Intimate or large-scale configurations</li>
+        <li>Full offsite catering also available</li>
+      </ul>
+    </div>
+    <div class="loc-card">
+      <div class="loc-num">02</div>
+      <div class="loc-badge">Jimbaran</div>
+      <div class="loc-name">InterContinental Resort<br>Taman Gita</div>
+      <div class="loc-desc">A refined 5-star resort setting within the InterContinental Bali Resort by IHG — elegant, coastal, and impeccably presented for grand receptions.</div>
+      <ul class="loc-feats">
+        <li>5-star resort backdrop & facilities</li>
+        <li>Indoor & outdoor banquet options</li>
+        <li>Seamless resort team coordination</li>
+        <li>Beachside & garden setups possible</li>
+      </ul>
+    </div>
+    <div class="loc-card loc-wide">
+      <div class="loc-badge">Anywhere in Bali</div>
+      <div class="loc-name">Offsite Catering</div>
+      <div class="loc-desc" style="max-width:560px">Your villa, your beach, your venue. The Chowk brings the full kitchen, live counters, service team, and mithai spread wherever your celebration is happening.</div>
+      <ul class="loc-feats">
+        <li>Private villas & estates</li>
+        <li>Beach & clifftop venues</li>
+        <li>Hotel event spaces</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials" style="padding:96px 80px">
+  <div class="sec-header">
+    <div class="eyebrow">What Clients Say</div>
+    <h2 class="sec-title">Praise from our <em>guests</em></h2>
+  </div>
+  <div class="t-grid">
+    <div class="tcard">
+      <div class="tcard-stars">★★★★★</div>
+      <div class="tcard-quote">"The food was extraordinary — our guests are still talking about the live chaat counter and mithai spread weeks later."</div>
+      <div class="tcard-line"></div>
+      <div class="tcard-author">Priya & Arjun Mehta</div>
+      <div class="tcard-event">Wedding Reception · Ubud · 180 guests</div>
+    </div>
+    <div class="tcard">
+      <div class="tcard-stars">★★★★★</div>
+      <div class="tcard-quote">"From the first tasting to the last course, The Chowk team was flawless. We didn't worry about a single thing on the day."</div>
+      <div class="tcard-line"></div>
+      <div class="tcard-author">Sunita Kapoor</div>
+      <div class="tcard-event">Wedding Banquet · Jimbaran · 240 guests</div>
+    </div>
+    <div class="tcard">
+      <div class="tcard-stars">★★★★★</div>
+      <div class="tcard-quote">"Guests with Jain, vegan, and non-veg requirements — every single one was taken care of beautifully. Remarkable range."</div>
+      <div class="tcard-line"></div>
+      <div class="tcard-author">The Sharma Family</div>
+      <div class="tcard-event">3-Day Wedding · Ubud · 120 guests</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<div class="contact-sec" id="contact">
+  <div class="contact-left">
+    <div class="eyebrow">Start Planning</div>
+    <h2 class="c-title">Let's build your<br><em>perfect feast</em></h2>
+    <p class="c-body">Reach out to our events team directly. We'll get back to you within a few hours with a tailored proposal for your celebration.</p>
+    <div class="c-items">
+      <a class="c-item" href="tel:+6200000000">
+        <div class="c-icon">📞</div>
+        <div><div class="c-label">Call us</div><div class="c-val">+62 000 000 0000</div></div>
+      </a>
+      <a class="c-item" href="https://wa.me/6200000000">
+        <div class="c-icon">💬</div>
+        <div><div class="c-label">WhatsApp</div><div class="c-val">Chat with our events team</div></div>
+      </a>
+      <a class="c-item" href="mailto:events@thechowk.id">
+        <div class="c-icon">✉️</div>
+        <div><div class="c-label">Email</div><div class="c-val">events@thechowk.id</div></div>
+      </a>
+    </div>
+  </div>
+  <div class="contact-right">
+    <div class="form-label">Quick enquiry</div>
+    <div class="form">
+      <div class="form-row">
+        <div class="field"><label>Your name</label><input type="text" placeholder="Priya Mehta"></div>
+        <div class="field"><label>Phone / WhatsApp</label><input type="tel" placeholder="+91 98765 43210"></div>
+      </div>
+      <div class="form-row">
+        <div class="field"><label>Event date</label><input type="date"></div>
+        <div class="field"><label>Guest count</label><input type="number" placeholder="e.g. 150"></div>
+      </div>
+      <div class="field">
+        <label>Preferred venue</label>
+        <select>
+          <option value="">Select a venue</option>
+          <option>Ubud — Museum Puri Lukisan</option>
+          <option>Jimbaran — InterContinental Resort</option>
+          <option>Offsite — My own venue</option>
+        </select>
+      </div>
+      <div class="field"><label>Tell us about your event</label><textarea placeholder="e.g. 3-day wedding, North Indian menu, Jain options needed…"></textarea></div>
+      <button class="form-btn">Send Enquiry →</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="f-logo"><img src="https://static.wixstatic.com/media/c16aa2_442a2fb3793a4a4c80b957ae8258fcfb~mv2.png/v1/fill/w_515,h_68,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/the%20chowk%20-%20logo%20-_primary%20logo%20copy%202.png" alt="The Chowk"></div>
+  <div class="f-note">Ubud · Jimbaran · Bali, Indonesia</div>
+</footer>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+  <div class="modal-panel">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-photo" id="modalPhoto"></div>
+    <div class="modal-info">
+      <div class="modal-tag" id="mTag"></div>
+      <div class="modal-title" id="mTitle"></div>
+      <div class="specs" id="mSpecs"></div>
+      <div class="ctags-label">Menu highlights</div>
+      <div class="ctags" id="mCuisine"></div>
+      <div class="tsection">
+        <div class="tquote" id="mQuote"></div>
+        <div class="tauthor" id="mAuthor"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const events=[
+  {id:1,featured:true,tag:"Wedding Reception",name:"The Kapoor–Sharma Wedding",location:"Ubud · Museum Puri Lukisan",guests:"220 guests",duration:"2-day event",photoLabel:"Grand reception · Ubud garden",cuisine:["North Indian","South Indian","Jain menu","Live chaat counter","Tandoor station","Mithai spread"],quote:"Every dish was a masterpiece. Our 220 guests couldn't stop raving about the live tandoor and the gulab jamuns.",author:"Ritu Kapoor · Bride's Mother",img:"https://static.wixstatic.com/media/c16aa2_ad22c3a744704946ac59c2dfb35f2d19~mv2.jpg/v1/fill/w_800,h_600,al_c,q_80,enc_avif,quality_auto/DSC_6061_JPG.jpg"},
+  {id:2,featured:false,tag:"Wedding Banquet",name:"Verma Family Celebration",location:"Jimbaran · InterContinental",guests:"160 guests",duration:"Single day",photoLabel:"Banquet setup · Jimbaran",cuisine:["North Indian","Vegan menu","Live counters","Cocktail canapes"],quote:"The team were absolute professionals. Food was exceptional, service impeccable.",author:"Ankit Verma · Groom",img:"https://static.wixstatic.com/media/c16aa2_311b22702b65423fb2aa11b447f683a9~mv2.png/v1/fill/w_600,h_500,al_c,q_85,enc_avif,quality_auto/IMG_2957_HEIC.png"},
+  {id:3,featured:false,tag:"Mehendi Evening",name:"Singh Family Mehendi",location:"Ubud · Private Villa",guests:"80 guests",duration:"Evening event",photoLabel:"Mehendi setup · Private villa",cuisine:["Street food stations","Chaat","Lassi bar","Indian sweets"],quote:"The chaat station was the highlight of the night. Felt like we were in Delhi!",author:"Jasleen Singh · Bride",img:"https://static.wixstatic.com/media/c16aa2_a5293544dd39435ebcaa5d9e04d65493~mv2.jpg/v1/fill/w_600,h_500,al_c,q_80,enc_avif,quality_auto/12_edited.jpg"},
+  {id:4,featured:false,tag:"Sangeet Night",name:"Malhotra–Gupta Sangeet",location:"Jimbaran · InterContinental",guests:"140 guests",duration:"Evening event",photoLabel:"Sangeet banquet · Jimbaran",cuisine:["Finger food","Live counter","North Indian mains","Mithai station"],quote:"The mithai counter was a showstopper. Every sweet was fresh and divine.",author:"Neha Malhotra · Bride",img:"https://static.wixstatic.com/media/c16aa2_7a3c756702584013896a86ac18358759~mv2.png/v1/fill/w_600,h_500,al_c,q_85,enc_avif,quality_auto/IMG_4919_heic.png"},
+  {id:5,featured:false,tag:"3-Day Wedding",name:"The Agarwal Wedding",location:"Ubud · Museum Puri Lukisan",guests:"300 guests",duration:"3-day event",photoLabel:"3-day setup · Ubud",cuisine:["Rajasthani menu","Jain menu","South Indian breakfast","Live tandoor","Dessert counter"],quote:"Three days, three menus, 300 guests — flawlessly executed every single time.",author:"Deepak Agarwal · Father of the Bride",img:"https://static.wixstatic.com/media/c16aa2_c29dfdfaa98f4b72931b6e511c1cdfa6~mv2.jpg/v1/fill/w_600,h_500,al_c,q_80,enc_avif,quality_auto/20241024_163232.jpg"}
+];
+
+function renderGrid(){
+  const g=document.getElementById('eventsGrid');
+  g.innerHTML=events.map(e=>`
+    <div class="ecard${e.featured?' featured':''}" onclick="openModal(${e.id})">
+      <div class="ecard-bg" style="background-image:url('${e.img}')"></div>
+      <div class="ecard-overlay">
+        <span class="ecard-tag">${e.tag}</span>
+        <div class="ecard-name">${e.name}</div>
+        <div class="ecard-meta"><span>${e.location}</span><span>${e.guests}</span><span>${e.duration}</span></div>
+      </div>
+    </div>`).join('');
+}
+
+function openModal(id){
+  const e=events.find(x=>x.id===id);
+  document.getElementById('mTag').textContent=e.tag;
+  document.getElementById('mTitle').textContent=e.name;
+  document.getElementById('modalPhoto').style.backgroundImage=`url('${e.img}')`;
+  document.getElementById('mSpecs').innerHTML=`
+    <div class="spec"><div class="spec-l">Location</div><div class="spec-v">${e.location}</div></div>
+    <div class="spec"><div class="spec-l">Guests</div><div class="spec-v">${e.guests}</div></div>
+    <div class="spec"><div class="spec-l">Duration</div><div class="spec-v">${e.duration}</div></div>
+    <div class="spec"><div class="spec-l">Event type</div><div class="spec-v">${e.tag}</div></div>`;
+  document.getElementById('mCuisine').innerHTML=e.cuisine.map(c=>`<span class="ctag">${c}</span>`).join('');
+  document.getElementById('mQuote').textContent=`"${e.quote}"`;
+  document.getElementById('mAuthor').textContent=`— ${e.author}`;
+  document.getElementById('modal').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+function closeModal(){
+  document.getElementById('modal').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+document.getElementById('modal').addEventListener('click',function(e){if(e.target===this)closeModal()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+renderGrid();
+</script>
+</body>
+</html>
