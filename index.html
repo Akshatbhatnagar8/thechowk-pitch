@@ -74,10 +74,8 @@ nav{
 .ecard{position:relative;overflow:hidden;cursor:pointer;aspect-ratio:3/4;background:var(--cream);transition:transform .1s}
 .ecard.featured{grid-column:span 2;aspect-ratio:auto;min-height:500px}
 .ecard:hover .ecard-bg{transform:scale(1.05)}
-.ecard-bg{width:100%;height:100%;min-height:320px;position:relative;overflow:hidden}
-.ecard-slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity .8s ease}
-.ecard-slide.active{opacity:1}
-.ecard:hover .ecard-slide.active{transform:scale(1.05);transition:opacity .8s ease,transform 6s ease}
+.ecard-bg{width:100%;height:100%;min-height:320px;background-size:cover;background-position:center;transition:transform .6s ease}
+.ecard:hover .ecard-bg{transform:scale(1.05)}
 .ecard-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(28,20,16,.93) 0%,rgba(28,20,16,.25) 55%,transparent 100%);display:flex;flex-direction:column;justify-content:flex-end;padding:28px}
 .ecard-tag{display:inline-block;margin-bottom:10px;font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);border:0.5px solid rgba(201,168,76,.5);padding:4px 10px;align-self:flex-start}
 .ecard-name{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:400;color:var(--ivory);line-height:1.2;margin-bottom:8px}
@@ -106,6 +104,12 @@ nav{
 .tquote{font-family:'Cormorant Garamond',serif;font-size:18px;font-style:italic;font-weight:300;line-height:1.65;color:var(--ink-mid);margin-bottom:12px}
 .tauthor{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold)}
 .tsection{border-top:0.5px solid var(--line);padding-top:22px;margin-top:auto}
+
+#gallery{padding:96px 80px;background:var(--ivory)}
+.gallery-grid{columns:3;gap:6px}
+.gallery-item{break-inside:avoid;margin-bottom:6px;overflow:hidden;cursor:pointer}
+.gallery-item img{width:100%;display:block;transition:transform .5s ease}
+.gallery-item:hover img{transform:scale(1.04)}
 
 #locations{background:var(--cream);padding:96px 80px}
 .loc-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:0}
@@ -249,6 +253,24 @@ footer{padding:30px 80px;background:var(--ink);border-top:0.5px solid rgba(201,1
     <p class="sec-sub" style="color:var(--ink-light)">Every celebration is unique. Click any event to see the full story — menus, guest details, and what the couple said.</p>
   </div>
   <div class="events-grid" id="eventsGrid"></div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="sec-header" style="padding:0 0 40px">
+    <div class="eyebrow">Our Work</div>
+    <h2 class="sec-title">A glimpse of the <em>experience</em></h2>
+  </div>
+  <div class="gallery-grid">
+    <div class="gallery-item"><img src="images/event1.jpg" alt="The Chowk catering"></div>
+    <div class="gallery-item"><img src="images/event2.jpg" alt="The Chowk catering"></div>
+    <div class="gallery-item"><img src="images/event3.jpg" alt="The Chowk catering"></div>
+    <div class="gallery-item"><img src="images/event4.jpg" alt="The Chowk catering"></div>
+    <div class="gallery-item"><img src="images/event5.jpg" alt="The Chowk catering"></div>
+    <div class="gallery-item"><img src="images/event6.jpg" alt="The Chowk catering"></div>
+    <div class="gallery-item"><img src="images/event7.jpg" alt="The Chowk catering"></div>
+    <div class="gallery-item"><img src="images/event8.jpg" alt="The Chowk catering"></div>
+  </div>
 </section>
 
 <!-- LOCATIONS -->
@@ -410,29 +432,13 @@ function renderGrid(){
   const g=document.getElementById('eventsGrid');
   g.innerHTML=events.map(e=>`
     <div class="ecard${e.featured?' featured':''}" onclick="openModal(${e.id})">
-      <div class="ecard-bg">
-        ${e.imgs.map((img,i)=>`<div class="ecard-slide${i===0?' active':''}" style="background-image:url('${img}')"></div>`).join('')}
-      </div>
+      <div class="ecard-bg" style="background-image:url('${e.imgs[0]}')"></div>
       <div class="ecard-overlay">
         <span class="ecard-tag">${e.tag}</span>
         <div class="ecard-name">${e.name}</div>
         <div class="ecard-meta"><span>${e.location}</span><span>${e.guests}</span><span>${e.duration}</span></div>
       </div>
     </div>`).join('');
-  startCardSlideshows();
-}
-
-function startCardSlideshows(){
-  document.querySelectorAll('.ecard-bg').forEach(bg=>{
-    const slides=bg.querySelectorAll('.ecard-slide');
-    if(slides.length<2)return;
-    let i=0;
-    setInterval(()=>{
-      slides[i].classList.remove('active');
-      i=(i+1)%slides.length;
-      slides[i].classList.add('active');
-    },3000);
-  });
 }
 
 function openModal(id){
