@@ -47,8 +47,10 @@ nav{
 .stat-num{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:300;line-height:1}
 .stat-label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink-light);margin-top:4px}
 .hero-right{position:relative;overflow:hidden}
-.photo-block{width:100%;height:100%;min-height:640px;background-size:cover;background-position:center;background-repeat:no-repeat}
-.img-label{position:absolute;bottom:24px;left:24px;background:rgba(28,20,16,.7);backdrop-filter:blur(8px);padding:8px 16px;border-radius:2px;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(250,247,242,.7)}
+.hero-slideshow{width:100%;height:100%;min-height:640px;position:relative}
+.hero-slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 1s ease}
+.hero-slide.active{opacity:1}
+.img-label{position:absolute;bottom:24px;left:24px;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);padding:8px 16px;border-radius:2px;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(251,230,214,.7);z-index:2}
 
 .why{background:var(--ink);color:var(--ivory);padding:96px 80px}
 .why .eyebrow{color:var(--gold)}
@@ -72,7 +74,10 @@ nav{
 .ecard{position:relative;overflow:hidden;cursor:pointer;aspect-ratio:3/4;background:var(--cream);transition:transform .1s}
 .ecard.featured{grid-column:span 2;aspect-ratio:auto;min-height:500px}
 .ecard:hover .ecard-bg{transform:scale(1.05)}
-.ecard-bg{width:100%;height:100%;min-height:320px;background-size:cover;background-position:center;transition:transform .6s ease}
+.ecard-bg{width:100%;height:100%;min-height:320px;position:relative;overflow:hidden}
+.ecard-slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity .8s ease}
+.ecard-slide.active{opacity:1}
+.ecard:hover .ecard-slide.active{transform:scale(1.05);transition:opacity .8s ease,transform 6s ease}
 .ecard-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(28,20,16,.93) 0%,rgba(28,20,16,.25) 55%,transparent 100%);display:flex;flex-direction:column;justify-content:flex-end;padding:28px}
 .ecard-tag{display:inline-block;margin-bottom:10px;font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);border:0.5px solid rgba(201,168,76,.5);padding:4px 10px;align-self:flex-start}
 .ecard-name{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:400;color:var(--ivory);line-height:1.2;margin-bottom:8px}
@@ -195,7 +200,12 @@ footer{padding:30px 80px;background:var(--ink);border-top:0.5px solid rgba(201,1
     </div>
   </div>
   <div class="hero-right">
-    <div class="photo-block" style="background-image:url('https://static.wixstatic.com/media/c16aa2_8486c07400a04cafa5aa812bc218bf06~mv2.jpg/v1/fill/w_1600,h_900,al_c,q_85,enc_avif,quality_auto/c16aa2_8486c07400a04cafa5aa812bc218bf06~mv2.jpg')"></div>
+    <div class="hero-slideshow" id="heroSlideshow">
+      <div class="hero-slide active" style="background-image:url('https://static.wixstatic.com/media/c16aa2_8486c07400a04cafa5aa812bc218bf06~mv2.jpg/v1/fill/w_1600,h_900,al_c,q_85,enc_avif,quality_auto/c16aa2_8486c07400a04cafa5aa812bc218bf06~mv2.jpg')"></div>
+      <div class="hero-slide" style="background-image:url('images/event2.jpg')"></div>
+      <div class="hero-slide" style="background-image:url('images/event4.jpg')"></div>
+      <div class="hero-slide" style="background-image:url('images/event7.jpg')"></div>
+    </div>
     <div class="img-label">Jimbaran · InterContinental Bali Resort</div>
   </div>
 </div>
@@ -390,30 +400,46 @@ footer{padding:30px 80px;background:var(--ink);border-top:0.5px solid rgba(201,1
 
 <script>
 const events=[
-  {id:1,featured:true,tag:"Sadhya Dinner",name:"Abi & Sid Wedding",location:"Hilton Bali",guests:"160 guests",duration:"2-day event",photoLabel:"Sadhya dinner · Hilton Bali",cuisine:["South Indian","Sadhya Service","Sit Down","Dessert Spread"],quote:"All the guests had a great time, ate a lot of food. The Dessert was probably the Highlight.",author:"Abinaja & Sid · Bride & Groom",img:"https://static.wixstatic.com/media/c16aa2_ad22c3a744704946ac59c2dfb35f2d19~mv2.jpg/v1/fill/w_800,h_600,al_c,q_80,enc_avif,quality_auto/DSC_6061_JPG.jpg"},
-  {id:2,featured:false,tag:"5-Event Wedding",name:"Kshitij & Shilpi Wedding",location:"The Patra Bali Resort & Villas",guests:"120 guests",duration:"5 events",photoLabel:"Wedding celebration · Patra Bali",cuisine:["North Indian","Live Stations"],quote:"An unforgettable five-event celebration with authentic North Indian flavors at every meal.",author:"Kshitij & Shilpi",img:"https://static.wixstatic.com/media/c16aa2_311b22702b65423fb2aa11b447f683a9~mv2.png/v1/fill/w_600,h_500,al_c,q_85,enc_avif,quality_auto/IMG_2957_HEIC.png"},
-  {id:3,featured:false,tag:"4-Event Wedding",name:"Shrey & Sai Wedding",location:"Glamp Nusa",guests:"160 guests",duration:"4 events",photoLabel:"Wedding events · Glamp Nusa",cuisine:["Live Stations","North Indian","Maharashtrian","Sit Down Service"],quote:"We are in Bali but food-wise felt like we never left India.",author:"Shrey · Groom",img:"https://static.wixstatic.com/media/c16aa2_a5293544dd39435ebcaa5d9e04d65493~mv2.jpg/v1/fill/w_600,h_500,al_c,q_80,enc_avif,quality_auto/12_edited.jpg"},
-  {id:4,featured:false,tag:"5-Event Wedding",name:"Swati & Bhavish Wedding",location:"Stone Villas",guests:"80 guests",duration:"5 events",photoLabel:"Wedding celebration · Stone Villas",cuisine:["North Indian","Bartending","Italian Appetizers"],quote:"From Haldi to Reception, every event was catered with precision and heart.",author:"Swati & Bhavish",img:"https://static.wixstatic.com/media/c16aa2_7a3c756702584013896a86ac18358759~mv2.png/v1/fill/w_600,h_500,al_c,q_85,enc_avif,quality_auto/IMG_4919_heic.png"}
+  {id:1,featured:true,tag:"Sadhya Dinner",name:"Abi & Sid Wedding",location:"Hilton Bali",guests:"160 guests",duration:"2-day event",cuisine:["South Indian","Sadhya Service","Sit Down","Dessert Spread"],quote:"All the guests had a great time, ate a lot of food. The Dessert was probably the Highlight.",author:"Abinaja & Sid · Bride & Groom",imgs:["images/event2.jpg","images/event3.jpg","images/event1.jpg"]},
+  {id:2,featured:false,tag:"5-Event Wedding",name:"Kshitij & Shilpi Wedding",location:"The Patra Bali Resort & Villas",guests:"120 guests",duration:"5 events",cuisine:["North Indian","Live Stations"],quote:"An unforgettable five-event celebration with authentic North Indian flavors at every meal.",author:"Kshitij & Shilpi",imgs:["images/event4.jpg","images/event5.jpg"]},
+  {id:3,featured:false,tag:"4-Event Wedding",name:"Shrey & Sai Wedding",location:"Glamp Nusa",guests:"160 guests",duration:"4 events",cuisine:["Live Stations","North Indian","Maharashtrian","Sit Down Service"],quote:"We are in Bali but food-wise felt like we never left India.",author:"Shrey · Groom",imgs:["images/event6.jpg","images/event1.jpg"]},
+  {id:4,featured:false,tag:"5-Event Wedding",name:"Swati & Bhavish Wedding",location:"Stone Villas",guests:"80 guests",duration:"5 events",cuisine:["North Indian","Bartending","Italian Appetizers"],quote:"From Haldi to Reception, every event was catered with precision and heart.",author:"Swati & Bhavish",imgs:["images/event7.jpg","images/event8.jpg","images/event5.jpg"]}
 ];
 
 function renderGrid(){
   const g=document.getElementById('eventsGrid');
   g.innerHTML=events.map(e=>`
     <div class="ecard${e.featured?' featured':''}" onclick="openModal(${e.id})">
-      <div class="ecard-bg" style="background-image:url('${e.img}')"></div>
+      <div class="ecard-bg">
+        ${e.imgs.map((img,i)=>`<div class="ecard-slide${i===0?' active':''}" style="background-image:url('${img}')"></div>`).join('')}
+      </div>
       <div class="ecard-overlay">
         <span class="ecard-tag">${e.tag}</span>
         <div class="ecard-name">${e.name}</div>
         <div class="ecard-meta"><span>${e.location}</span><span>${e.guests}</span><span>${e.duration}</span></div>
       </div>
     </div>`).join('');
+  startCardSlideshows();
+}
+
+function startCardSlideshows(){
+  document.querySelectorAll('.ecard-bg').forEach(bg=>{
+    const slides=bg.querySelectorAll('.ecard-slide');
+    if(slides.length<2)return;
+    let i=0;
+    setInterval(()=>{
+      slides[i].classList.remove('active');
+      i=(i+1)%slides.length;
+      slides[i].classList.add('active');
+    },3000);
+  });
 }
 
 function openModal(id){
   const e=events.find(x=>x.id===id);
   document.getElementById('mTag').textContent=e.tag;
   document.getElementById('mTitle').textContent=e.name;
-  document.getElementById('modalPhoto').style.backgroundImage=`url('${e.img}')`;
+  document.getElementById('modalPhoto').style.backgroundImage=`url('${e.imgs[0]}')`;
   document.getElementById('mSpecs').innerHTML=`
     <div class="spec"><div class="spec-l">Location</div><div class="spec-v">${e.location}</div></div>
     <div class="spec"><div class="spec-l">Guests</div><div class="spec-v">${e.guests}</div></div>
@@ -430,6 +456,17 @@ function closeModal(){
   document.getElementById('modal').classList.remove('open');
   document.body.style.overflow='';
 }
+
+// Hero slideshow
+(function(){
+  const slides=document.querySelectorAll('#heroSlideshow .hero-slide');
+  let i=0;
+  setInterval(()=>{
+    slides[i].classList.remove('active');
+    i=(i+1)%slides.length;
+    slides[i].classList.add('active');
+  },4000);
+})();
 
 document.getElementById('modal').addEventListener('click',function(e){if(e.target===this)closeModal()});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
